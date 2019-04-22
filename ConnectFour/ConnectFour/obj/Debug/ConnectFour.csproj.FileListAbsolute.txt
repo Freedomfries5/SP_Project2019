@@ -1,0 +1,10 @@
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.csprojAssemblyReference.cache
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.ConnectFour.resources
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.Properties.Resources.resources
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.csproj.GenerateResource.cache
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\bin\Debug\ConnectFour.exe.config
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\bin\Debug\ConnectFour.exe
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\bin\Debug\ConnectFour.pdb
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.exe
+C:\Users\Daniel\source\repos\ConnectFour\ConnectFour\obj\Debug\ConnectFour.pdb
