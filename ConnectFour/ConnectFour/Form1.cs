@@ -55,16 +55,26 @@ namespace ConnectFour
                     {
                         Graphics g = this.CreateGraphics();
                         g.FillEllipse(Brushes.SlateGray, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        turnDisplay.Text = "Computer's Turn next";
                         turnCounter++;
                     }
                     if (this.turn == 2)
                     {
                         Graphics g = this.CreateGraphics();
                         g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        turnDisplay.Text = "Player's Turn next";
                         turnCounter++;
                     }
                 }
             }
+            int winner = WinnerPlayer(this.turn);
+            if (winner != -1)
+            {
+                string winsy = (winner == 1) ? "Player" : "Computer";
+                MessageBox.Show(winsy + " wins");
+                Application.Restart();
+            }
+
             if (this.turn == 1)
                 turn = 2;
             else
@@ -78,7 +88,42 @@ namespace ConnectFour
         }
         private int WinnerPlayer(int playerToCheck)
         {
-
+            //Vertical Checks
+            for(int row = 0; row < this.board.GetLength(0)-3; row++)
+            {
+                for(int col =0; col < this.board.GetLength(1); col++)
+                {
+                    if (this.AllNumbersEqual(playerToCheck, this.board[row, col], this.board[row + 1, col], this.board[row + 2, col], this.board[row + 3, col]))
+                        return playerToCheck;
+                }
+            }
+            //Horizontal Checks
+            for (int row = 0; row < this.board.GetLength(0); row++)
+            {
+                for (int col = 0; col < this.board.GetLength(1)-3; col++)
+                {
+                    if (this.AllNumbersEqual(playerToCheck, this.board[row, col], this.board[row, col+1], this.board[row, col+2], this.board[row, col + 3]))
+                        return playerToCheck;
+                }
+            }
+            //Top-left to Bottom right
+            for (int row = 0; row < this.board.GetLength(0) - 3; row++)
+            {
+                for (int col = 0; col < this.board.GetLength(1) - 3; col++)
+                {
+                    if (this.AllNumbersEqual(playerToCheck, this.board[row, col], this.board[row+1, col+1], this.board[row+2, col+2], this.board[row+3, col+3]))
+                        return playerToCheck;
+                }
+            }
+            //Top-right to Bottom left
+            for (int row = 0; row < this.board.GetLength(0)-3; row++)
+            {
+                for (int col = 3; col < this.board.GetLength(1); col++)
+                {
+                    if (this.AllNumbersEqual(playerToCheck, this.board[row, col], this.board[row + 1, col - 1], this.board[row + 2, col - 2], this.board[row + 3, col - 3]))
+                        return playerToCheck;
+                }
+            }
             return -1;
         }
         private bool AllNumbersEqual(int toCheck, params int[] numbers)

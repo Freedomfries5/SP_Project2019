@@ -35,12 +35,14 @@
             this.easyButt = new System.Windows.Forms.Button();
             this.medButt = new System.Windows.Forms.Button();
             this.hardButt = new System.Windows.Forms.Button();
+            this.turnLabel = new System.Windows.Forms.Label();
+            this.turnDisplay = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // PlayChoiceLabel
             // 
             this.PlayChoiceLabel.AutoSize = true;
-            this.PlayChoiceLabel.Location = new System.Drawing.Point(640, 13);
+            this.PlayChoiceLabel.Location = new System.Drawing.Point(596, 14);
             this.PlayChoiceLabel.Name = "PlayChoiceLabel";
             this.PlayChoiceLabel.Size = new System.Drawing.Size(107, 17);
             this.PlayChoiceLabel.TabIndex = 0;
@@ -48,7 +50,7 @@
             // 
             // PlayerButton
             // 
-            this.PlayerButton.Location = new System.Drawing.Point(643, 34);
+            this.PlayerButton.Location = new System.Drawing.Point(599, 34);
             this.PlayerButton.Name = "PlayerButton";
             this.PlayerButton.Size = new System.Drawing.Size(90, 23);
             this.PlayerButton.TabIndex = 1;
@@ -58,7 +60,7 @@
             // 
             // PCButton
             // 
-            this.PCButton.Location = new System.Drawing.Point(643, 64);
+            this.PCButton.Location = new System.Drawing.Point(599, 63);
             this.PCButton.Name = "PCButton";
             this.PCButton.Size = new System.Drawing.Size(90, 23);
             this.PCButton.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             // easyButt
             // 
-            this.easyButt.Location = new System.Drawing.Point(643, 174);
+            this.easyButt.Location = new System.Drawing.Point(599, 174);
             this.easyButt.Name = "easyButt";
             this.easyButt.Size = new System.Drawing.Size(127, 23);
             this.easyButt.TabIndex = 4;
@@ -86,7 +88,7 @@
             // 
             // medButt
             // 
-            this.medButt.Location = new System.Drawing.Point(643, 203);
+            this.medButt.Location = new System.Drawing.Point(599, 203);
             this.medButt.Name = "medButt";
             this.medButt.Size = new System.Drawing.Size(127, 23);
             this.medButt.TabIndex = 5;
@@ -95,18 +97,36 @@
             // 
             // hardButt
             // 
-            this.hardButt.Location = new System.Drawing.Point(643, 233);
+            this.hardButt.Location = new System.Drawing.Point(599, 232);
             this.hardButt.Name = "hardButt";
             this.hardButt.Size = new System.Drawing.Size(127, 30);
             this.hardButt.TabIndex = 6;
             this.hardButt.Text = "Pain a Plenty";
             this.hardButt.UseVisualStyleBackColor = true;
             // 
+            // turnLabel
+            // 
+            this.turnLabel.AutoSize = true;
+            this.turnLabel.Location = new System.Drawing.Point(599, 291);
+            this.turnLabel.Name = "turnLabel";
+            this.turnLabel.Size = new System.Drawing.Size(89, 17);
+            this.turnLabel.TabIndex = 7;
+            this.turnLabel.Text = "Current Turn";
+            // 
+            // turnDisplay
+            // 
+            this.turnDisplay.Location = new System.Drawing.Point(599, 311);
+            this.turnDisplay.Name = "turnDisplay";
+            this.turnDisplay.Size = new System.Drawing.Size(176, 22);
+            this.turnDisplay.TabIndex = 0;
+            // 
             // ConnectFour
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.turnDisplay);
+            this.Controls.Add(this.turnLabel);
             this.Controls.Add(this.hardButt);
             this.Controls.Add(this.medButt);
             this.Controls.Add(this.easyButt);
@@ -132,6 +152,8 @@
         private System.Windows.Forms.Button easyButt;
         private System.Windows.Forms.Button medButt;
         private System.Windows.Forms.Button hardButt;
+        private System.Windows.Forms.Label turnLabel;
+        private System.Windows.Forms.TextBox turnDisplay;
     }
 }
 
