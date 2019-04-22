@@ -31,6 +31,10 @@
             this.PlayChoiceLabel = new System.Windows.Forms.Label();
             this.PlayerButton = new System.Windows.Forms.Button();
             this.PCButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.easyButt = new System.Windows.Forms.Button();
+            this.medButt = new System.Windows.Forms.Button();
+            this.hardButt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayChoiceLabel
@@ -46,25 +50,67 @@
             // 
             this.PlayerButton.Location = new System.Drawing.Point(643, 34);
             this.PlayerButton.Name = "PlayerButton";
-            this.PlayerButton.Size = new System.Drawing.Size(75, 23);
+            this.PlayerButton.Size = new System.Drawing.Size(90, 23);
             this.PlayerButton.TabIndex = 1;
             this.PlayerButton.Text = "Player";
             this.PlayerButton.UseVisualStyleBackColor = true;
+            this.PlayerButton.Click += new System.EventHandler(this.PlayerButton_Click);
             // 
             // PCButton
             // 
             this.PCButton.Location = new System.Drawing.Point(643, 64);
             this.PCButton.Name = "PCButton";
-            this.PCButton.Size = new System.Drawing.Size(75, 23);
+            this.PCButton.Size = new System.Drawing.Size(90, 23);
             this.PCButton.TabIndex = 2;
             this.PCButton.Text = "Computer";
             this.PCButton.UseVisualStyleBackColor = true;
+            this.PCButton.Click += new System.EventHandler(this.PCButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(596, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(192, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Difficulty (Medium as Default)";
+            // 
+            // easyButt
+            // 
+            this.easyButt.Location = new System.Drawing.Point(643, 174);
+            this.easyButt.Name = "easyButt";
+            this.easyButt.Size = new System.Drawing.Size(127, 23);
+            this.easyButt.TabIndex = 4;
+            this.easyButt.Text = "Game Journo";
+            this.easyButt.UseVisualStyleBackColor = true;
+            // 
+            // medButt
+            // 
+            this.medButt.Location = new System.Drawing.Point(643, 203);
+            this.medButt.Name = "medButt";
+            this.medButt.Size = new System.Drawing.Size(127, 23);
+            this.medButt.TabIndex = 5;
+            this.medButt.Text = "Normal Gamer";
+            this.medButt.UseVisualStyleBackColor = true;
+            // 
+            // hardButt
+            // 
+            this.hardButt.Location = new System.Drawing.Point(643, 233);
+            this.hardButt.Name = "hardButt";
+            this.hardButt.Size = new System.Drawing.Size(127, 30);
+            this.hardButt.TabIndex = 6;
+            this.hardButt.Text = "Pain a Plenty";
+            this.hardButt.UseVisualStyleBackColor = true;
             // 
             // ConnectFour
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.hardButt);
+            this.Controls.Add(this.medButt);
+            this.Controls.Add(this.easyButt);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.PCButton);
             this.Controls.Add(this.PlayerButton);
             this.Controls.Add(this.PlayChoiceLabel);
@@ -82,6 +128,10 @@
         private System.Windows.Forms.Label PlayChoiceLabel;
         private System.Windows.Forms.Button PlayerButton;
         private System.Windows.Forms.Button PCButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button easyButt;
+        private System.Windows.Forms.Button medButt;
+        private System.Windows.Forms.Button hardButt;
     }
 }
 

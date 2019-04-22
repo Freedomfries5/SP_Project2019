@@ -15,6 +15,7 @@ namespace ConnectFour
         private Rectangle[] boardColumns;
         private int[,] board;
         private int turn;
+        private int turnCounter = 0;
         public ConnectFour()
         {
             InitializeComponent();
@@ -53,12 +54,14 @@ namespace ConnectFour
                     if (this.turn == 1)
                     {
                         Graphics g = this.CreateGraphics();
-                        g.FillEllipse(Brushes.Orchid, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        g.FillEllipse(Brushes.SlateGray, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        turnCounter++;
                     }
                     if (this.turn == 2)
                     {
                         Graphics g = this.CreateGraphics();
                         g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        turnCounter++;
                     }
                 }
             }
@@ -66,9 +69,27 @@ namespace ConnectFour
                 turn = 2;
             else
                 turn = 1;
+            if(turnCounter >0)
+            {
+                PlayerButton.Enabled = false;
+                PCButton.Enabled = false;
+            }
+
         }
+        private int WinnerPlayer(int playerToCheck)
+        {
 
-
+            return -1;
+        }
+        private bool AllNumbersEqual(int toCheck, params int[] numbers)
+        {
+            foreach(int num in numbers)
+            {
+                if (num != toCheck)
+                    return false;
+            }
+            return true;
+        }
         private int ColumnNumber(Point mouse)
         {
             for(int i=0; i< this.boardColumns.Length; i++)
@@ -91,6 +112,16 @@ namespace ConnectFour
                     return i;
             }
             return -1;
+        }
+
+        private void PlayerButton_Click(object sender, EventArgs e)
+        {
+            this.turn = 1;
+        }
+
+        private void PCButton_Click(object sender, EventArgs e)
+        {
+            this.turn = 2;
         }
     }
 }
