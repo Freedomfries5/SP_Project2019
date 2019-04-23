@@ -14,14 +14,8 @@ namespace ConnectFour
     {
         private Rectangle[] boardColumns;
         private int[,] board;
-        public int height = 6;
-        public int width = 7;
         private int turn;
         private int turnCounter = 0;
-        private Boolean next;
-
-
-
         public ConnectFour()
         {
             InitializeComponent();
@@ -29,65 +23,6 @@ namespace ConnectFour
             this.board = new int[6, 7];
             //MessageBox.Show(this.board[0, 0].ToString());
             this.turn = 1;
-        }
-        public ConnectFour(int height, int width)
-        {
-            this.width = width;
-            this.height = height;
-            board = new int[height, width];
-        }
-        public ConnectFour(int[,] content, Boolean next)
-        {
-            loadContents(content);
-            this.next = next;
-        }
-        public ConnectFour getNextState(int column)
-        {
-            ConnectFour next = this.copy();
-            next.place(column);
-            return next;
-        }
-
-        public Boolean canPlace(int column)
-        {
-            return column >= 0 && column < width && board[0,column] == 0;
-        }
-        public Boolean place(int column)
-        {
-            int disk = (next == true) ? 1 : 2;
-            if (!canPlace(column))
-                return false;
-            int diskHeight = height - 1;
-            while (board[diskHeight,column] != 0)
-                diskHeight--;
-            board[diskHeight,column] = disk;
-            next = !next;
-            return true;
-        }
-
-        public Boolean getNextTurn()
-        {
-            return next;
-        }
-
-        public int currentGameState()
-        {
-            if (WinnerPlayer(1) == 1)
-            {
-                return 1;
-            }
-            else if (WinnerPlayer(2) == 2)
-            {
-                return 2;
-            }
-            else if (WinnerPlayer(0) == 0)
-            {
-                return 3;
-            }
-            else
-            {
-                return 0;
-            }
         }
         private void ConnectFour_Paint(object sender, PaintEventArgs e)
         {
@@ -104,22 +39,6 @@ namespace ConnectFour
                 }
             }
         }
-
-        public void loadContents(int[,] contents)
-        {
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    board[i,j] = contents[i,j];
-        }
-        public bool isFull()
-        {
-            for (int i = 0; i < board.Length; i++)
-                for (int j = 0; j < board.GetLength(i); j++)
-                    if (board[i,j] == 0)
-                        return false;
-            return true;
-        }
-
         private void ConnectFour_MouseClick(object sender, MouseEventArgs e)
         {
             int colIndex = this.ColumnNumber(e.Location);
@@ -238,7 +157,7 @@ namespace ConnectFour
             for(int i=5; i>=0;i--)
             {
                 if (this.board[i, col] == 0)
-                    return i;  
+                    return i;
             }
             return -1;
         }
@@ -250,9 +169,6 @@ namespace ConnectFour
         {
             this.turn = 2;
         }
-        public ConnectFour copy()
-        {
-            return new ConnectFour(board, this.next);
-        }
+        
     }
 }
