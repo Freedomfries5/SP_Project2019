@@ -13,19 +13,141 @@ namespace ConnectFour
         private static double Formula_Parameter = Math.Sqrt(2);
         private long timeallotted;
 
-        public MCTS(ConnectFour board, long timealotted)
+        public MCTS(ConnectFour board, long timeallotted)
         {
+            this.width = board.width;
             this.timeallotted = timeallotted;
             root = new Node(null, board);
         }
+
+        public void update(int move)
+        {
+            root = root.children[move] != null
+                    ? root.children[move]
+                    : new Node(null, root.board.getNextState(move));
+        }
+
+        public int getOptimalMove()
+        {
+            long time = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+            for (long stop = time + timeallotted; stop > time;)
+            {
+                Node selectedNode = select();
+                if (selectedNode == null)
+                    continue;
+                Node expandedNode = expand(selectedNode);
+                double result = simulate(expandedNode);
+                backpropagate(expandedNode, result);
+            }
+            int maxIndex = -1;
+            for (int i = 0; i < width; i++)
+            {
+                if (root.children[i] != null)
+                {
+                    if (maxIndex == -1 || root.children[i].visit > root.children[maxIndex].visit)
+                        maxIndex = i;
+                }
+            }
+            return maxIndex;
+        }
+
+        private Node select()
+        {
+            return select(root);
+        }
+
+        private Node select(Node parent)
+        {
+            // if parent has at least child without statistics, select parent
+            for (int i = 0; i < width; i++)
+            {
+                if (parent.children[i] == null && parent.board.canPlace(i))
+                {
+                    return parent;
+                }
+            }
+            // if all children have statistics, use UCT to select next node to visit
+            double maxSelectionVal = -1;
+            int maxIndex = -1;
+            for (int i = 0; i < width; i++)
+            {
+                if (!parent.board.canPlace(i))
+                    continue;
+                Node currentChild = parent.children[i];
+                double wins = parent.board.getNextTurn() == true
+                  ? currentChild.p1Win
+                  : (currentChild.visit - currentChild.p1Win);
+                double selectionVal = wins / currentChild.visit
+                  + Formula_Parameter * Math.Sqrt(Math.Log(parent.visit) / currentChild.visit);// UCT
+                if (selectionVal > maxSelectionVal)
+                {
+                    maxSelectionVal = selectionVal;
+                    maxIndex = i;
+                }
+            }
+            if (maxIndex == -1)
+                return null;
+            return select(parent.children[maxIndex]);
+        }
+
+        private Node expand(Node selectedNode)
+        {
+            // get unvisited child nodes
+            List<int> unvisitedChildrenIndices = new List<int>(width);
+            for (int i = 0; i < width; i++)
+            {
+                if (selectedNode.children[i] == null && selectedNode.board.canPlace(i))
+                {
+                    unvisitedChildrenIndices.Add(i);
+                }
+            }
+            Random rnd = new Random();
+            // randomly select unvisited child and create node for it
+            int selectedIndex = unvisitedChildrenIndices[((int)(rnd.Next()* unvisitedChildrenIndices.Capacity))];
+            selectedNode.children[selectedIndex] = new Node(selectedNode, selectedNode.board.getNextState(selectedIndex));
+            return selectedNode.children[selectedIndex];
+        }
+
+        private double simulate(Node expandedNode)
+        {
+            Random rand = new Random();
+            ConnectFour simulationBoard = expandedNode.board.copy();
+            while (simulationBoard.currentGameState() == 0)
+            {
+                simulationBoard.place((rand.Next() * width));
+            }
+            // System.out.println(simulationBoard);
+
+            switch (simulationBoard.currentGameState())
+            {
+                case 1:
+                    return 1;
+                case 2:
+                    return 0;
+                default:
+                    return 0.5;
+            }
+        }
+
+        private void backpropagate(Node expandedNode, double simulationResult)
+        {
+            Node currentNode = expandedNode;
+            while (currentNode != null)
+            {
+                currentNode.incrementVisits();
+                currentNode.incrementPlayerWins(simulationResult);
+                currentNode = currentNode.parent;
+            }
+        }
+
     }
     class Node
     {
-        private Node parent;
-        private Node[] children;
-        private int visit;
-        private double p1Win;
-        private ConnectFour board;
+        public Node parent;
+        public Node[] children;
+        public int visit;
+        public double p1Win;
+        public ConnectFour board;
 
         public Node(Node parent, ConnectFour board)
         {
