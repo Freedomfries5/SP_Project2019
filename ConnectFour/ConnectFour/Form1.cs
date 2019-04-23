@@ -76,15 +76,18 @@ namespace ConnectFour
             {
                 return 1;
             }
-            if (WinnerPlayer(2) == 2)
+            else if (WinnerPlayer(2) == 2)
             {
                 return 2;
             }
-            if()
-            return this.WinnerPlayer(PLAYER_1_DISK) ? PLAYER_1_WON
-              : this.didPlayerWin(PLAYER_2_DISK) ? PLAYER_2_WON
-              : this.isFull() ? TIE
-              : ONGOING;
+            else if (WinnerPlayer(0) == 0)
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
         }
         private void ConnectFour_Paint(object sender, PaintEventArgs e)
         {
@@ -101,6 +104,7 @@ namespace ConnectFour
                 }
             }
         }
+
         public void loadContents(int[,] contents)
         {
             for (int i = 0; i < height; i++)
@@ -119,12 +123,13 @@ namespace ConnectFour
         private void ConnectFour_MouseClick(object sender, MouseEventArgs e)
         {
             int colIndex = this.ColumnNumber(e.Location);
-            Console.WriteLine(e.Location);
+            //Console.WriteLine(e.Location); //Debugging
             if(colIndex != -1)
             {
                 int rowIndex = this.EmptyRow(colIndex);
                 if (rowIndex != -1)
                 {
+                    //These fill the board with the right color
                     this.board[rowIndex, colIndex] = this.turn;
                     if (this.turn == 1)
                     {
@@ -159,8 +164,8 @@ namespace ConnectFour
                 PlayerButton.Enabled = false;
                 PCButton.Enabled = false;
             }
-
         }
+        //Series of checks to see if a win state is found, this could probably be refactored into a better method but we can do that later
         private int WinnerPlayer(int playerToCheck)
         {
             //Vertical Checks
@@ -201,6 +206,7 @@ namespace ConnectFour
             }
             return -1;
         }
+        //Helper method for checking the player has a win condition, specifically if enough pieces are on the board and the pieces are in the right position
         private bool AllNumbersEqual(int toCheck, params int[] numbers)
         {
             foreach(int num in numbers)
@@ -210,6 +216,7 @@ namespace ConnectFour
             }
             return true;
         }
+        //Sends back the column that we are placing the piece into 0 on far left 6 on far right for our width of 7
         private int ColumnNumber(Point mouse)
         {
             for(int i=0; i< this.boardColumns.Length; i++)
@@ -218,12 +225,14 @@ namespace ConnectFour
                 {
                     if((mouse.X<= this.boardColumns[i].X + this.boardColumns[i].Width) && (mouse.Y <= this.boardColumns[i].Y + this.boardColumns[i].Height))
                     {
+                        //MessageBox.Show("" + i);
                         return i;
                     }
                 }
             }
             return -1;
         }
+        //places piece at lowest spot, goes from 5 to 0 to make 6 our depth
         private int EmptyRow(int col)
         {
             for(int i=5; i>=0;i--)
@@ -233,12 +242,10 @@ namespace ConnectFour
             }
             return -1;
         }
-
         private void PlayerButton_Click(object sender, EventArgs e)
         {
             this.turn = 1;
         }
-
         private void PCButton_Click(object sender, EventArgs e)
         {
             this.turn = 2;
