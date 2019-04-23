@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,8 +14,13 @@ namespace ConnectFour
     {
         private Rectangle[] boardColumns;
         private int[,] board;
+        public int height = 6;
+        public int width = 7;
         private int turn;
         private int turnCounter = 0;
+        private Boolean next;
+        private Boolean gameStart = false;
+
         public ConnectFour()
         {
             InitializeComponent();
@@ -23,6 +28,65 @@ namespace ConnectFour
             this.board = new int[6, 7];
             //MessageBox.Show(this.board[0, 0].ToString());
             this.turn = 1;
+        }
+        public ConnectFour(int height, int width)
+        {
+            this.width = width;
+            this.height = height;
+            board = new int[height, width];
+        }
+        public ConnectFour(int[,] content, Boolean next)
+        {
+            loadContents(content);
+            this.next = next;
+        }
+        public ConnectFour getNextState(int column)
+        {
+            ConnectFour next = this.copy();
+            next.place(column);
+            return next;
+        }
+
+        public Boolean canPlace(int column)
+        {
+            return column >= 0 && column < width && board[0,column] == 0;
+        }
+        public Boolean place(int column)
+        {
+            int disk = (next == true) ? 1 : 2;
+            if (!canPlace(column))
+                return false;
+            int diskHeight = height - 1;
+            while (board[diskHeight,column] != 0)
+                diskHeight--;
+            board[diskHeight,column] = disk;
+            next = !next;
+            return true;
+        }
+
+        public Boolean getNextTurn()
+        {
+            return next;
+        }
+
+        public int currentGameState()
+        {
+            if (WinnerPlayer(1) == 1)
+            {
+                return 1;
+            }
+            else if (WinnerPlayer(2) == 2)
+            {
+                return 2;
+            }
+            else if (WinnerPlayer(0) == 0)
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
         }
         private void ConnectFour_Paint(object sender, PaintEventArgs e)
         {
@@ -39,50 +103,70 @@ namespace ConnectFour
                 }
             }
         }
+
+        public void loadContents(int[,] contents)
+        {
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                    board[i,j] = contents[i,j];
+        }
+        public bool isFull()
+        {
+            for (int i = 0; i < board.Length; i++)
+                for (int j = 0; j < board.GetLength(i); j++)
+                    if (board[i,j] == 0)
+                        return false;
+            return true;
+        }
         private void ConnectFour_MouseClick(object sender, MouseEventArgs e)
         {
-            int colIndex = this.ColumnNumber(e.Location);
-            //Console.WriteLine(e.Location); //Debugging
-            if(colIndex != -1)
+            if (gameStart)
             {
-                int rowIndex = this.EmptyRow(colIndex);
-                if (rowIndex != -1)
+                int colIndex = this.ColumnNumber(e.Location);
+                //Console.WriteLine(e.Location); //Debugging
+                if (colIndex != -1)
                 {
-                    //These fill the board with the right color
-                    this.board[rowIndex, colIndex] = this.turn;
-                    if (this.turn == 1)
+                    int rowIndex = this.EmptyRow(colIndex);
+                    if (rowIndex != -1)
                     {
-                        Graphics g = this.CreateGraphics();
-                        g.FillEllipse(Brushes.SlateGray, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                        turnDisplay.Text = "Computer's Turn next";
-                        turnCounter++;
-                    }
-                    if (this.turn == 2)
-                    {
-                        Graphics g = this.CreateGraphics();
-                        g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                        turnDisplay.Text = "Player's Turn next";
-                        turnCounter++;
+                        //These fill the board with the right color
+                        this.board[rowIndex, colIndex] = this.turn;
+                        if (this.turn == 1)
+                        {
+                            Graphics g = this.CreateGraphics();
+                            g.FillEllipse(Brushes.SlateGray, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            turnDisplay.Text = "Computer's Turn next";
+                            turnCounter++;
+                        }
+                        if (this.turn == 2)
+                        {
+                            Graphics g = this.CreateGraphics();
+                            g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            turnDisplay.Text = "Player's Turn next";
+                            turnCounter++;
+                        }
                     }
                 }
-            }
-            int winner = WinnerPlayer(this.turn);
-            if (winner != -1)
-            {
-                string winsy = (winner == 1) ? "Player" : "Computer";
-                MessageBox.Show(winsy + " wins");
-                Application.Restart();
-            }
+                int winner = WinnerPlayer(this.turn);
+                if (winner != -1)
+                {
+                    string winsy = (winner == 1) ? "Player" : "Computer";
+                    MessageBox.Show(winsy + " wins");
+                    Application.Restart();
+                }
 
-            if (this.turn == 1)
-                turn = 2;
-            else
-                turn = 1;
-            if(turnCounter >0)
-            {
-                PlayerButton.Enabled = false;
-                PCButton.Enabled = false;
+                if (this.turn == 1)
+                    turn = 2;
+                else
+                    turn = 1;
+                if (gameStart)
+                {
+                    PlayerButton.Enabled = false;
+                    PCButton.Enabled = false;
+                }
             }
+            else
+                MessageBox.Show("Please press play when you are ready to begin");
         }
         //Series of checks to see if a win state is found, this could probably be refactored into a better method but we can do that later
         private int WinnerPlayer(int playerToCheck)
@@ -157,7 +241,7 @@ namespace ConnectFour
             for(int i=5; i>=0;i--)
             {
                 if (this.board[i, col] == 0)
-                    return i;
+                    return i;  
             }
             return -1;
         }
@@ -169,6 +253,28 @@ namespace ConnectFour
         {
             this.turn = 2;
         }
-        
+        public ConnectFour copy()
+        {
+            return new ConnectFour(board, this.next);
+        }
+        private void playStart_Click(object sender, EventArgs e)
+        {
+            gameStart = true;
+            PlayerButton.Enabled = false;
+            PCButton.Enabled = false;
+        }
+        private void computerTurn(int whosTurn)
+        {
+            if(whosTurn == 2)
+            {
+                //MonteCarlo here?
+                //cycle through choices and then draw the fillEllipse where it needs to be
+            }
+        }
+
+        private void restartGame_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }
