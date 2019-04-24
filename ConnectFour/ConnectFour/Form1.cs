@@ -14,13 +14,15 @@ namespace ConnectFour
     {
         private Rectangle[] boardColumns;
         private int[,] board;
+        private int rowIndex;
         public int height = 6;
         public int width = 7;
+        private long timeallotted;
         private int turn;
         private int turnCounter = 0;
         private Boolean next;
         private Boolean gameStart = false;
-        ConnectFour connectboard = new ConnectFour();
+        
 
         public ConnectFour()
         {
@@ -127,7 +129,7 @@ namespace ConnectFour
                 //Console.WriteLine(e.Location); //Debugging
                 if (colIndex != -1)
                 {
-                    int rowIndex = this.EmptyRow(colIndex);
+                    rowIndex = this.EmptyRow(colIndex);
                     if (rowIndex != -1)
                     {
                         //These fill the board with the right color
@@ -139,13 +141,7 @@ namespace ConnectFour
                             turnDisplay.Text = "Computer's Turn next";
                             turnCounter++;
                         }
-                        if (this.turn == 2)
-                        {
-                            Graphics g = this.CreateGraphics();
-                            g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                            turnDisplay.Text = "Player's Turn next";
-                            turnCounter++;
-                        }
+                        computerTurn(2);
                     }
                 }
                 int winner = WinnerPlayer(this.turn);
@@ -266,17 +262,24 @@ namespace ConnectFour
         }
         private void computerTurn(int whosTurn)
         {
+            ConnectFour connectboard = new ConnectFour();
             connectboard = copy();
-            //MCTS ai = new MCTS(connectboard,timeallotted);
-            if(whosTurn == 2)
-            {
-                //int colIndex = 
-            }
+            MCTS ai = new MCTS(connectboard,timeallotted);
+            int colIndex = ai.getOptimalMove();
+            Graphics g = this.CreateGraphics();
+            g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+            turnDisplay.Text = "Player's Turn next";
+            turnCounter++;
         }
 
         private void restartGame_Click(object sender, EventArgs e)
         {
             Application.Restart();
+        }
+
+        private void easyButt_Click(object sender, EventArgs e)
+        {
+            this.timeallotted = 2;
         }
     }
 }
