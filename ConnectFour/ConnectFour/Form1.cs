@@ -13,10 +13,10 @@ namespace ConnectFour
     public partial class ConnectFour : Form
     {
         private Rectangle[] boardColumns;
-        private int[,] board;
         private int rowIndex;
-        public int height = 6;
-        public int width = 7;
+        public int height = 7;
+        public int width = 6;
+        public int[,] board = new int[7,6];
         private long timeallotted;
         private int turn;
         private int turnCounter = 0;
@@ -109,6 +109,7 @@ namespace ConnectFour
 
         public void loadContents(int[,] contents)
         {
+            contents = new int[height, width];
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++)
                     board[i,j] = contents[i,j];
@@ -138,7 +139,8 @@ namespace ConnectFour
                         {
                             Graphics g = this.CreateGraphics();
                             g.FillEllipse(Brushes.SlateGray, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                            turnDisplay.Text = "Computer's Turn next";
+                            Console.WriteLine(colIndex + ", " + rowIndex);
+                            //turnDisplay.Text = "Computer's Turn next";
                             turnCounter++;
                         }
                         computerTurn(2);
@@ -151,11 +153,12 @@ namespace ConnectFour
                     MessageBox.Show(winsy + " wins");
                     Application.Restart();
                 }
-
+                /*
                 if (this.turn == 1)
                     turn = 2;
                 else
                     turn = 1;
+                    */
                 if (gameStart)
                 {
                     PlayerButton.Enabled = false;
@@ -264,11 +267,12 @@ namespace ConnectFour
         {
             ConnectFour connectboard = new ConnectFour();
             connectboard = copy();
-            MCTS ai = new MCTS(connectboard,timeallotted);
+            MCTS ai = new MCTS(connectboard,2);
             int colIndex = ai.getOptimalMove();
             Graphics g = this.CreateGraphics();
             g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-            turnDisplay.Text = "Player's Turn next";
+            Console.WriteLine(colIndex + ", " + rowIndex + ", "+ai.getOptimalMove());
+            //turnDisplay.Text = "Player's Turn next";
             turnCounter++;
         }
 

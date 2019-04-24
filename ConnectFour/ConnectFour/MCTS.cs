@@ -29,7 +29,7 @@ namespace ConnectFour
 
         public int getOptimalMove()
         {
-            long time = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+            long time = DateTime.Now.Ticks;
             for (long stop = time + timeallotted; stop > time;)
             {
                 Node selectedNode = select();
@@ -38,14 +38,18 @@ namespace ConnectFour
                 Node expandedNode = expand(selectedNode);
                 double result = simulate(expandedNode);
                 backpropagate(expandedNode, result);
+                time = DateTime.Now.Ticks;
             }
             int maxIndex = -1;
             for (int i = 0; i < width; i++)
             {
+                
                 if (root.children[i] != null)
                 {
                     if (maxIndex == -1 || root.children[i].visit > root.children[maxIndex].visit)
+                    {
                         maxIndex = i;
+                    }
                 }
             }
             return maxIndex;
@@ -101,9 +105,9 @@ namespace ConnectFour
                     unvisitedChildrenIndices.Add(i);
                 }
             }
-            Random rnd = new Random();
+            Random rnd = new Random(unvisitedChildrenIndices.Count);
             // randomly select unvisited child and create node for it
-            int selectedIndex = unvisitedChildrenIndices[((int)(rnd.Next() * unvisitedChildrenIndices.Capacity))];
+            int selectedIndex = unvisitedChildrenIndices[((int)(rnd.Next(unvisitedChildrenIndices.Count)))];
             selectedNode.children[selectedIndex] = new Node(selectedNode, selectedNode.board.getNextState(selectedIndex));
             return selectedNode.children[selectedIndex];
         }
