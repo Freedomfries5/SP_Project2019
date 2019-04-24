@@ -20,6 +20,7 @@ namespace ConnectFour
         private int turnCounter = 0;
         private Boolean next;
         private Boolean gameStart = false;
+        ConnectFour connectboard = new ConnectFour();
 
         public ConnectFour()
         {
@@ -265,10 +266,11 @@ namespace ConnectFour
         }
         private void computerTurn(int whosTurn)
         {
+            connectboard = copy();
+            //MCTS ai = new MCTS(connectboard,timeallotted);
             if(whosTurn == 2)
             {
-                //MonteCarlo here?
-                //cycle through choices and then draw the fillEllipse where it needs to be
+                //int colIndex = 
             }
         }
 
