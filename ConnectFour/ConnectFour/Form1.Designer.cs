@@ -37,24 +37,24 @@
             this.hardButt = new System.Windows.Forms.Button();
             this.turnLabel = new System.Windows.Forms.Label();
             this.turnDisplay = new System.Windows.Forms.TextBox();
+            this.playStart = new System.Windows.Forms.Button();
+            this.restartGame = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayChoiceLabel
             // 
             this.PlayChoiceLabel.AutoSize = true;
-            this.PlayChoiceLabel.Location = new System.Drawing.Point(447, 11);
-            this.PlayChoiceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.PlayChoiceLabel.Location = new System.Drawing.Point(596, 14);
             this.PlayChoiceLabel.Name = "PlayChoiceLabel";
-            this.PlayChoiceLabel.Size = new System.Drawing.Size(81, 13);
+            this.PlayChoiceLabel.Size = new System.Drawing.Size(107, 17);
             this.PlayChoiceLabel.TabIndex = 0;
             this.PlayChoiceLabel.Text = "Who goes first?";
             // 
             // PlayerButton
             // 
-            this.PlayerButton.Location = new System.Drawing.Point(449, 28);
-            this.PlayerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PlayerButton.Location = new System.Drawing.Point(599, 34);
             this.PlayerButton.Name = "PlayerButton";
-            this.PlayerButton.Size = new System.Drawing.Size(68, 19);
+            this.PlayerButton.Size = new System.Drawing.Size(90, 23);
             this.PlayerButton.TabIndex = 1;
             this.PlayerButton.Text = "Player";
             this.PlayerButton.UseVisualStyleBackColor = true;
@@ -62,10 +62,9 @@
             // 
             // PCButton
             // 
-            this.PCButton.Location = new System.Drawing.Point(449, 51);
-            this.PCButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PCButton.Location = new System.Drawing.Point(599, 63);
             this.PCButton.Name = "PCButton";
-            this.PCButton.Size = new System.Drawing.Size(68, 19);
+            this.PCButton.Size = new System.Drawing.Size(90, 23);
             this.PCButton.TabIndex = 2;
             this.PCButton.Text = "Computer";
             this.PCButton.UseVisualStyleBackColor = true;
@@ -74,19 +73,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(447, 116);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(596, 143);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 13);
+            this.label1.Size = new System.Drawing.Size(192, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Difficulty (Medium as Default)";
             // 
             // easyButt
             // 
-            this.easyButt.Location = new System.Drawing.Point(449, 141);
-            this.easyButt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.easyButt.Location = new System.Drawing.Point(599, 174);
             this.easyButt.Name = "easyButt";
-            this.easyButt.Size = new System.Drawing.Size(95, 19);
+            this.easyButt.Size = new System.Drawing.Size(127, 23);
             this.easyButt.TabIndex = 4;
             this.easyButt.Text = "Game Journo";
             this.easyButt.UseVisualStyleBackColor = true;
@@ -94,20 +91,18 @@
             // 
             // medButt
             // 
-            this.medButt.Location = new System.Drawing.Point(449, 165);
-            this.medButt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medButt.Location = new System.Drawing.Point(599, 203);
             this.medButt.Name = "medButt";
-            this.medButt.Size = new System.Drawing.Size(95, 19);
+            this.medButt.Size = new System.Drawing.Size(127, 23);
             this.medButt.TabIndex = 5;
             this.medButt.Text = "Normal Gamer";
             this.medButt.UseVisualStyleBackColor = true;
             // 
             // hardButt
             // 
-            this.hardButt.Location = new System.Drawing.Point(449, 188);
-            this.hardButt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hardButt.Location = new System.Drawing.Point(599, 232);
             this.hardButt.Name = "hardButt";
-            this.hardButt.Size = new System.Drawing.Size(95, 24);
+            this.hardButt.Size = new System.Drawing.Size(127, 30);
             this.hardButt.TabIndex = 6;
             this.hardButt.Text = "Pain a Plenty";
             this.hardButt.UseVisualStyleBackColor = true;
@@ -115,26 +110,49 @@
             // turnLabel
             // 
             this.turnLabel.AutoSize = true;
-            this.turnLabel.Location = new System.Drawing.Point(449, 236);
-            this.turnLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.turnLabel.Location = new System.Drawing.Point(599, 291);
             this.turnLabel.Name = "turnLabel";
-            this.turnLabel.Size = new System.Drawing.Size(66, 13);
+            this.turnLabel.Size = new System.Drawing.Size(89, 17);
             this.turnLabel.TabIndex = 7;
             this.turnLabel.Text = "Current Turn";
             // 
             // turnDisplay
             // 
-            this.turnDisplay.Location = new System.Drawing.Point(449, 253);
-            this.turnDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turnDisplay.Location = new System.Drawing.Point(599, 311);
             this.turnDisplay.Name = "turnDisplay";
-            this.turnDisplay.Size = new System.Drawing.Size(133, 20);
+            this.turnDisplay.Size = new System.Drawing.Size(176, 22);
             this.turnDisplay.TabIndex = 0;
+            // 
+            // playStart
+            // 
+            this.playStart.Location = new System.Drawing.Point(700, 34);
+            this.playStart.Name = "playStart";
+            this.playStart.Size = new System.Drawing.Size(62, 52);
+            this.playStart.TabIndex = 8;
+            this.playStart.Text = "PLAY";
+            this.playStart.UseVisualStyleBackColor = true;
+            this.playStart.Click += new System.EventHandler(this.playStart_Click);
+            // 
+            // restartGame
+            // 
+            this.restartGame.BackColor = System.Drawing.Color.Yellow;
+            this.restartGame.Font = new System.Drawing.Font("Wingdings 3", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.restartGame.ForeColor = System.Drawing.Color.Black;
+            this.restartGame.Location = new System.Drawing.Point(602, 385);
+            this.restartGame.Name = "restartGame";
+            this.restartGame.Size = new System.Drawing.Size(173, 34);
+            this.restartGame.TabIndex = 9;
+            this.restartGame.Text = "Restart";
+            this.restartGame.UseVisualStyleBackColor = false;
+            this.restartGame.Click += new System.EventHandler(this.restartGame_Click);
             // 
             // ConnectFour
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.restartGame);
+            this.Controls.Add(this.playStart);
             this.Controls.Add(this.turnDisplay);
             this.Controls.Add(this.turnLabel);
             this.Controls.Add(this.hardButt);
@@ -144,7 +162,6 @@
             this.Controls.Add(this.PCButton);
             this.Controls.Add(this.PlayerButton);
             this.Controls.Add(this.PlayChoiceLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ConnectFour";
             this.Text = "Connectu Fouru";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ConnectFour_Paint);
@@ -165,6 +182,8 @@
         private System.Windows.Forms.Button hardButt;
         private System.Windows.Forms.Label turnLabel;
         private System.Windows.Forms.TextBox turnDisplay;
+        private System.Windows.Forms.Button playStart;
+        private System.Windows.Forms.Button restartGame;
     }
 }
 
