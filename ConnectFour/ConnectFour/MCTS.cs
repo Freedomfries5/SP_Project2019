@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +43,7 @@ namespace ConnectFour
             int maxIndex = -1;
             for (int i = 0; i < width; i++)
             {
-                
+
                 if (root.children[i] != null)
                 {
                     if (maxIndex == -1 || root.children[i].visit > root.children[maxIndex].visit)
@@ -105,9 +105,9 @@ namespace ConnectFour
                     unvisitedChildrenIndices.Add(i);
                 }
             }
-            Random rnd = new Random(unvisitedChildrenIndices.Count);
+            Random rnd = new Random();
             // randomly select unvisited child and create node for it
-            int selectedIndex = unvisitedChildrenIndices[((int)(rnd.Next(unvisitedChildrenIndices.Count)))];
+            int selectedIndex = unvisitedChildrenIndices[(rnd.Next(0, unvisitedChildrenIndices.Count))];
             selectedNode.children[selectedIndex] = new Node(selectedNode, selectedNode.board.getNextState(selectedIndex));
             return selectedNode.children[selectedIndex];
         }

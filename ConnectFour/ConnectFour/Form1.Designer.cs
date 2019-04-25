@@ -1,4 +1,4 @@
-﻿namespace ConnectFour
+﻿﻿namespace ConnectFour
 {
     partial class ConnectFour
     {
@@ -97,6 +97,7 @@
             this.medButt.TabIndex = 5;
             this.medButt.Text = "Normal Gamer";
             this.medButt.UseVisualStyleBackColor = true;
+            this.medButt.Click += new System.EventHandler(this.medButt_Click);
             // 
             // hardButt
             // 
@@ -106,6 +107,7 @@
             this.hardButt.TabIndex = 6;
             this.hardButt.Text = "Pain a Plenty";
             this.hardButt.UseVisualStyleBackColor = true;
+            this.hardButt.Click += new System.EventHandler(this.hardButt_Click);
             // 
             // turnLabel
             // 
@@ -186,4 +188,3 @@
         private System.Windows.Forms.Button restartGame;
     }
 }
-
