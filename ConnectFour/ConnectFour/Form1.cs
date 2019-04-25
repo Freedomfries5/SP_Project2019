@@ -56,6 +56,7 @@ namespace ConnectFour
         }
         public Boolean place(int column)
         {
+            //Console.WriteLine(next);
             int disk = (next == true) ? 1 : 2;
             if (!canPlace(column))
                 return false;
@@ -63,7 +64,9 @@ namespace ConnectFour
             while (board[diskHeight, column] != 0)
                 diskHeight--;
             board[diskHeight, column] = disk;
+            
             next = !next;
+            
             return true;
         }
         public Boolean getNextTurn()
@@ -80,7 +83,7 @@ namespace ConnectFour
             {
                 return 2;
             }
-            else if (WinnerPlayer(0) == 0)
+            else if (isFull())
             {
                 return 3;
             }
@@ -114,7 +117,7 @@ namespace ConnectFour
         }
         public bool isFull()
         {
-            for (int i = 0; i < board.Length; i++)
+            for (int i = 0; i < board.GetLength(i); i++)
                 for (int j = 0; j < board.GetLength(i); j++)
                     if (board[i, j] == 0)
                         return false;
@@ -271,6 +274,8 @@ namespace ConnectFour
             int colIndex = 0; ;
             for (int i = 0; i < timeallotted; i++)
             {
+                
+                ai.update(colIndex);
                 colIndex = ai.getOptimalMove();
             }
             rowIndex = this.EmptyRow(colIndex);
@@ -285,7 +290,8 @@ namespace ConnectFour
             else
             {
                 while (rowIndex == -1)
-                {                  
+                {
+                    ai.update(colIndex);
                     colIndex = ai.getOptimalMove();
                     ai.update(colIndex);
                     rowIndex = this.EmptyRow(colIndex);
@@ -299,7 +305,7 @@ namespace ConnectFour
                     }
                 }
             }
-            ai.update(colIndex);
+            
             turnCounter++;
             winner = WinnerPlayer(this.turn);
         }

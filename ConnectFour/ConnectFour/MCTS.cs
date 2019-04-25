@@ -118,9 +118,8 @@ namespace ConnectFour
             ConnectFour simulationBoard = expandedNode.board.copy();
             while (simulationBoard.currentGameState() == 0)
             {
-                simulationBoard.place((rand.Next() * width));
+                simulationBoard.place((rand.Next(0,width)));
             }
-            // System.out.println(simulationBoard);
 
             switch (simulationBoard.currentGameState())
             {
