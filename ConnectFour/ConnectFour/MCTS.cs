@@ -1,4 +1,6 @@
 ﻿﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,17 +31,19 @@ namespace ConnectFour
 
         public int getOptimalMove()
         {
-            long time = DateTime.Now.Ticks;
-            for (long stop = time + timeallotted; stop > time;)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            while(stopwatch.Elapsed <= TimeSpan.FromSeconds(2))
             {
+                Console.WriteLine(stopwatch.Elapsed);
                 Node selectedNode = select();
                 if (selectedNode == null)
                     continue;
                 Node expandedNode = expand(selectedNode);
                 double result = simulate(expandedNode);
                 backpropagate(expandedNode, result);
-                time = DateTime.Now.Ticks;
             }
+            stopwatch.Stop();
             int maxIndex = -1;
             for (int i = 0; i < width; i++)
             {
@@ -120,7 +124,7 @@ namespace ConnectFour
             {
                 simulationBoard.place((rand.Next(0,width)));
             }
-
+            //Console.WriteLine(simulationBoard.currentGameState());
             switch (simulationBoard.currentGameState())
             {
                 case 1:
@@ -130,6 +134,7 @@ namespace ConnectFour
                 default:
                     return 0.5;
             }
+            
         }
 
         private void backpropagate(Node expandedNode, double simulationResult)

@@ -27,8 +27,8 @@ namespace ConnectFour
         public ConnectFour()
         {
             InitializeComponent();
-            this.boardColumns = new Rectangle[7];
-            this.board = new int[6, 7];
+            this.boardColumns = new Rectangle[width];
+            this.board = new int[height, width];
             //MessageBox.Show(this.board[0, 0].ToString());
             this.turn = 1;
         }
@@ -118,9 +118,14 @@ namespace ConnectFour
         public bool isFull()
         {
             for (int i = 0; i < board.GetLength(i); i++)
+            {
+                Console.WriteLine("I :" + board.GetLength(i));
                 for (int j = 0; j < board.GetLength(i); j++)
+                {
                     if (board[i, j] == 0)
                         return false;
+                }
+            }
             return true;
         }
         private void ConnectFour_MouseClick(object sender, MouseEventArgs e)
@@ -271,13 +276,10 @@ namespace ConnectFour
             ConnectFour connectboard = new ConnectFour();
             connectboard = copy();
             MCTS ai = new MCTS(connectboard, timeallotted);
-            int colIndex = 0; ;
-            for (int i = 0; i < timeallotted; i++)
-            {
-                
+            int colIndex = 0; ; 
                 ai.update(colIndex);
                 colIndex = ai.getOptimalMove();
-            }
+
             rowIndex = this.EmptyRow(colIndex);
             if (rowIndex != -1)
             {
@@ -330,7 +332,7 @@ namespace ConnectFour
         private void hardButt_Click(object sender, EventArgs e)
         {
             this.timeallotted = 6;
-            turnDisplay.Text = "Hard and thicc Mode";
+            turnDisplay.Text = "Hard Mode";
         }
     }
 }
