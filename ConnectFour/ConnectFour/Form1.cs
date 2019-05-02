@@ -54,20 +54,20 @@ namespace ConnectFour
         {
             return column >= 0 && column < width && board[0, column] == 0;
         }
-        public Boolean place(int column)
+        public int place(int column)
         {
             //Console.WriteLine(next);
             int disk = (next == true) ? 1 : 2;
             if (!canPlace(column))
-                return false;
+                return 0;
             int diskHeight = height - 1;
             while (board[diskHeight, column] != 0)
                 diskHeight--;
             board[diskHeight, column] = disk;
-            
+
             next = !next;
             
-            return true;
+            return 1;
         }
         public Boolean getNextTurn()
         {
@@ -117,10 +117,9 @@ namespace ConnectFour
         }
         public bool isFull()
         {
-            for (int i = 0; i < board.GetLength(i); i++)
+            for (int i = 0; i < board.GetLength(0); i++)
             {
-                Console.WriteLine("I :" + board.GetLength(i));
-                for (int j = 0; j < board.GetLength(i); j++)
+                for (int j = 0; j < board.GetLength(0); j++)
                 {
                     if (board[i, j] == 0)
                         return false;
@@ -276,24 +275,20 @@ namespace ConnectFour
             ConnectFour connectboard = new ConnectFour();
             connectboard = copy();
             MCTS ai = new MCTS(connectboard, timeallotted);
-            int colIndex = 0; ; 
-                ai.update(colIndex);
-                colIndex = ai.getOptimalMove();
-
+            int colIndex = 0;  
+            colIndex = ai.getOptimalMove();
             rowIndex = this.EmptyRow(colIndex);
             if (rowIndex != -1)
             {
                 this.board[rowIndex, colIndex] = this.turn;
                 Graphics g = this.CreateGraphics();
                 g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                Console.WriteLine("Computer" + colIndex + ", " + rowIndex + ", " + ai.getOptimalMove());
                 //turnDisplay.Text = "Player's Turn next";
             }
             else
             {
                 while (rowIndex == -1)
                 {
-                    ai.update(colIndex);
                     colIndex = ai.getOptimalMove();
                     ai.update(colIndex);
                     rowIndex = this.EmptyRow(colIndex);
@@ -302,12 +297,11 @@ namespace ConnectFour
                         this.board[rowIndex, colIndex] = this.turn;
                         Graphics g = this.CreateGraphics();
                         g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                        Console.WriteLine("Computer" + colIndex + ", " + rowIndex + ", " + ai.getOptimalMove());
                         //turnDisplay.Text = "Player's Turn next";
                     }
                 }
             }
-            
+            ai.update(colIndex);
             turnCounter++;
             winner = WinnerPlayer(this.turn);
         }
@@ -334,5 +328,6 @@ namespace ConnectFour
             this.timeallotted = 6;
             turnDisplay.Text = "Hard Mode";
         }
+
     }
 }

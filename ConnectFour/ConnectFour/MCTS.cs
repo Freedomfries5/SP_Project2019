@@ -33,9 +33,8 @@ namespace ConnectFour
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            while(stopwatch.Elapsed <= TimeSpan.FromSeconds(2))
+            while(stopwatch.Elapsed <= TimeSpan.FromSeconds(timeallotted))
             {
-                Console.WriteLine(stopwatch.Elapsed);
                 Node selectedNode = select();
                 if (selectedNode == null)
                     continue;
@@ -82,7 +81,7 @@ namespace ConnectFour
                 if (!parent.board.canPlace(i))
                     continue;
                 Node currentChild = parent.children[i];
-                double wins = parent.board.getNextTurn() == true
+                double wins = (parent.board.getNextTurn() == true)
                   ? currentChild.p1Win
                   : (currentChild.visit - currentChild.p1Win);
                 double selectionVal = wins / currentChild.visit
