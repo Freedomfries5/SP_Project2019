@@ -54,7 +54,7 @@
             // PlayerButton
             // 
             this.PlayerButton.Location = new System.Drawing.Point(449, 28);
-            this.PlayerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PlayerButton.Margin = new System.Windows.Forms.Padding(2);
             this.PlayerButton.Name = "PlayerButton";
             this.PlayerButton.Size = new System.Drawing.Size(68, 19);
             this.PlayerButton.TabIndex = 1;
@@ -65,7 +65,7 @@
             // PCButton
             // 
             this.PCButton.Location = new System.Drawing.Point(449, 51);
-            this.PCButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PCButton.Margin = new System.Windows.Forms.Padding(2);
             this.PCButton.Name = "PCButton";
             this.PCButton.Size = new System.Drawing.Size(68, 19);
             this.PCButton.TabIndex = 2;
@@ -86,7 +86,7 @@
             // easyButt
             // 
             this.easyButt.Location = new System.Drawing.Point(449, 141);
-            this.easyButt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.easyButt.Margin = new System.Windows.Forms.Padding(2);
             this.easyButt.Name = "easyButt";
             this.easyButt.Size = new System.Drawing.Size(95, 19);
             this.easyButt.TabIndex = 4;
@@ -97,7 +97,7 @@
             // medButt
             // 
             this.medButt.Location = new System.Drawing.Point(449, 165);
-            this.medButt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medButt.Margin = new System.Windows.Forms.Padding(2);
             this.medButt.Name = "medButt";
             this.medButt.Size = new System.Drawing.Size(95, 19);
             this.medButt.TabIndex = 5;
@@ -108,7 +108,7 @@
             // hardButt
             // 
             this.hardButt.Location = new System.Drawing.Point(449, 188);
-            this.hardButt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hardButt.Margin = new System.Windows.Forms.Padding(2);
             this.hardButt.Name = "hardButt";
             this.hardButt.Size = new System.Drawing.Size(95, 24);
             this.hardButt.TabIndex = 6;
@@ -122,14 +122,14 @@
             this.turnLabel.Location = new System.Drawing.Point(449, 236);
             this.turnLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.turnLabel.Name = "turnLabel";
-            this.turnLabel.Size = new System.Drawing.Size(66, 13);
+            this.turnLabel.Size = new System.Drawing.Size(84, 13);
             this.turnLabel.TabIndex = 7;
-            this.turnLabel.Text = "Current Turn";
+            this.turnLabel.Text = "Current Difficulty";
             // 
             // turnDisplay
             // 
             this.turnDisplay.Location = new System.Drawing.Point(449, 253);
-            this.turnDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turnDisplay.Margin = new System.Windows.Forms.Padding(2);
             this.turnDisplay.Name = "turnDisplay";
             this.turnDisplay.Size = new System.Drawing.Size(133, 20);
             this.turnDisplay.TabIndex = 0;
@@ -137,7 +137,7 @@
             // playStart
             // 
             this.playStart.Location = new System.Drawing.Point(525, 28);
-            this.playStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.playStart.Margin = new System.Windows.Forms.Padding(2);
             this.playStart.Name = "playStart";
             this.playStart.Size = new System.Drawing.Size(46, 42);
             this.playStart.TabIndex = 8;
@@ -151,7 +151,7 @@
             this.restartGame.Font = new System.Drawing.Font("Wingdings 3", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.restartGame.ForeColor = System.Drawing.Color.Black;
             this.restartGame.Location = new System.Drawing.Point(452, 313);
-            this.restartGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.restartGame.Margin = new System.Windows.Forms.Padding(2);
             this.restartGame.Name = "restartGame";
             this.restartGame.Size = new System.Drawing.Size(130, 28);
             this.restartGame.TabIndex = 9;
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.OliveDrab;
+            this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.restartGame);
             this.Controls.Add(this.playStart);
@@ -176,7 +176,7 @@
             this.Controls.Add(this.PCButton);
             this.Controls.Add(this.PlayerButton);
             this.Controls.Add(this.PlayChoiceLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ConnectFour";
             this.Text = "Connectu Fouru";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ConnectFour_Paint);

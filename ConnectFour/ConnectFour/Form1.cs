@@ -17,7 +17,7 @@ namespace ConnectFour
         public int height = 6;
         public int width = 7;
         public int[,] board = new int[6, 7];
-        private long timeallotted = 4;
+        private double timeallotted = .02;
         private int turn;
         private int turnCounter = 0;
         private Boolean next;
@@ -94,7 +94,7 @@ namespace ConnectFour
         }
         private void ConnectFour_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.LimeGreen, 24, 24, 340, 300);
+            e.Graphics.FillRectangle(Brushes.Yellow, 24, 24, 340, 300);
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 7; j++)
@@ -103,7 +103,7 @@ namespace ConnectFour
                     {
                         this.boardColumns[j] = new Rectangle(32 + 48 * j, 24, 32, 300);
                     }
-                    e.Graphics.FillEllipse(Brushes.BlanchedAlmond, 32 + 48 * j, 32 + 48 * i, 32, 32);
+                    e.Graphics.FillEllipse(Brushes.White, 32 + 48 * j, 32 + 48 * i, 32, 32);
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace ConnectFour
                         if (this.turn == 1)
                         {
                             Graphics g = this.CreateGraphics();
-                            g.FillEllipse(Brushes.SlateGray, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            g.FillEllipse(Brushes.Red, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
                             Console.WriteLine("Player" + colIndex + ", " + rowIndex);
                             //turnDisplay.Text = "Computer's Turn next";
                             turnCounter++;
@@ -278,7 +278,7 @@ namespace ConnectFour
             {
                 this.board[rowIndex, colIndex] = this.turn;
                 Graphics g = this.CreateGraphics();
-                g.FillEllipse(Brushes.HotPink, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                g.FillEllipse(Brushes.Blue, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
                 //turnDisplay.Text = "Player's Turn next";
             }
             else
@@ -309,19 +309,19 @@ namespace ConnectFour
 
         private void easyButt_Click(object sender, EventArgs e)
         {
-            this.timeallotted = 2;
+            this.timeallotted = 0.02;
             turnDisplay.Text = "Easy Mode";
         }
 
         private void medButt_Click(object sender, EventArgs e)
         {
-            this.timeallotted = 4;
+            this.timeallotted = 0.15;
             turnDisplay.Text = "Medium Mode";
         }
 
         private void hardButt_Click(object sender, EventArgs e)
         {
-            this.timeallotted = 6;
+            this.timeallotted = 2;
             turnDisplay.Text = "Hard Mode";
         }
 

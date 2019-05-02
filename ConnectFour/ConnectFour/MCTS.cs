@@ -13,9 +13,9 @@ namespace ConnectFour
         private Node root;
         private int width;
         private static double Formula_Parameter = Math.Sqrt(2);
-        public long timeallotted;
+        public double timeallotted;
 
-        public MCTS(ConnectFour board, long timeallotted)
+        public MCTS(ConnectFour board, double timeallotted)
         {
             this.width = board.width;
             this.timeallotted = timeallotted;
