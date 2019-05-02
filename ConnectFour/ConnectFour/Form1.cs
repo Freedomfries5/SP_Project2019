@@ -85,7 +85,7 @@ namespace ConnectFour
             }
             else if (isFull())
             {
-                return 3;
+                return 3; 
             }
             else
             {
