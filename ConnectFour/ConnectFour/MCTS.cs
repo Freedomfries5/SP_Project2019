@@ -46,7 +46,6 @@ namespace ConnectFour
             int maxIndex = -1;
             for (int i = 0; i < width; i++)
             {
-
                 if (root.children[i] != null)
                 {
                     if (maxIndex == -1 || root.children[i].visit > root.children[maxIndex].visit)
@@ -123,7 +122,6 @@ namespace ConnectFour
             {
                 simulationBoard.place((rand.Next(0,width)));
             }
-            //Console.WriteLine(simulationBoard.currentGameState());
             switch (simulationBoard.currentGameState())
             {
                 case 1:

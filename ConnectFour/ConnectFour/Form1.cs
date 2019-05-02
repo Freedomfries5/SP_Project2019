@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -110,10 +110,7 @@ namespace ConnectFour
 
         public void loadContents(int[,] contents)
         {
-            contents = new int[height, width];
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
-                    board[i, j] = contents[i, j];
+            board = (int[,])contents.Clone();
         }
         public bool isFull()
         {
@@ -272,8 +269,7 @@ namespace ConnectFour
         private void computerTurn(int whosTurn)
         {
             this.turn = whosTurn;
-            ConnectFour connectboard = new ConnectFour();
-            connectboard = copy();
+            ConnectFour connectboard = new ConnectFour(board, next);
             MCTS ai = new MCTS(connectboard, timeallotted);
             int colIndex = 0;  
             colIndex = ai.getOptimalMove();
@@ -329,5 +325,34 @@ namespace ConnectFour
             turnDisplay.Text = "Hard Mode";
         }
 
+
+        public String toString()
+        {
+            String result = "|-";
+            for (int j = 0; j < width; j++)
+            {
+                result += "--|-";
+            }
+            result = result.Substring(0, result.Length - 1) + "\n";
+            for (int i = 0; i < height; i++)
+            {
+                result += "| ";
+                for (int j = 0; j < width; j++)
+                {
+                    result += (board[i,j] == 0 ? " " : (board[i,j] == 1 ? "P" : "A")) + " | ";
+                }
+                result = result.Substring(0, result.Length - 1);
+                result += "\n|-";
+                for (int j = 0; j < width; j++)
+                {
+                    result += "--|-";
+                }
+                result = result.Substring(0, result.Length - 1);
+                result += "\n";
+            }
+            result += "  0   1   2   3   4   5   6  ";
+            return result.Substring(0, result.Length - 1);
+        }
     }
+
 }
